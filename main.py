@@ -53,99 +53,66 @@ def activate_job():  # activate these items
 @app.route('/api/data')
 def get_data():
     # start a list, to be used like a information database
-    user_stats = []
+    user_classes = []
 
     # add a row to list, an Info record
-    user_stats.append({
-        "ingredient_id": 10000,
-        "ingredient_name": "Glycerin",
-        "purpose": "Skin-Identical Ingredient, Moisturizer",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/glycerin",
+    user_classes.append({
+        "user_id": 10000,
+        "user_name": "Aidan Lau",
+        "classes": ['AP CSP, Chinese, AP Calc, English, AP Bio'],
+        "GPA": "3.9",
+        "ap_count": "3",
     })
 
-    # add a row to list, an Info record
-    user_stats.append({
-        "ingredient_id": 10001,
-        "ingredient_name": "Hyaluronic Acid",
-        "purpose": "Skin-Identical Ingredient, Moisturizer",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/hyaluronic-acid",
+    user_classes.append({
+        "user_id": 10001,
+        "user_name": "Rayyan Darugar",
+        "classes": ["AP CSP, Class2, Class3, Class4, Class5"],
+        "GPA": "TBA",
+        "ap_count": "TBA",
     })
     
-    user_stats.append({
-        "ingredient_id": 10002,
-        "ingredient_name": "Niacinamide",
-        "purpose": "Cell-Communicating Ingredient, Skin Brightening, Anti-Acne, Moisturizer",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/niacinamide",
+    user_classes.append({
+        "user_id": 10002,
+        "user_name": "Daniel Choi",
+        "classes": ["AP CSP, Class2, Class3, Class4, Class5"],
+        "GPA": "TBA",
+        "ap_count": "TBA",
     })
     
-    user_stats.append({
-        "ingredient_id": 10003,
-        "ingredient_name": "Glycolic Acid",
-        "purpose": "Exfoliant, Buffering",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/glycolic-acid",
+    user_classes.append({
+        "user_id": 10002,
+        "user_name": "Unknown Person",
+        "classes": ["AP CSP, Class2, Class3, Class4, Class5"],
+        "GPA": "TBA",
+        "ap_count": "TBA",
     })
     
-    user_stats.append({
-        "ingredient_id": 10004,
-        "ingredient_name": "Snail Secretion Filtrate",
-        "purpose": "Antioxidant, Moisturizer",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/snail-secretion-filtrate",
+    user_classes.append({
+        "user_id": 10002,
+        "user_name": "Unknown Person",
+        "classes": ["AP CSP, Class2, Class3, Class4, Class5"],
+        "GPA": "TBA",
+        "ap_count": "TBA",
     })
     
-    user_stats.append({
-        "ingredient_id": 10005,
-        "ingredient_name": "Lactic Acid",
-        "purpose": "Exfoliant, Moisturizer, Buffering",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/lactic-acid",
+    user_classes.append({
+        "user_id": 10002,
+        "user_name": "Unknown Person",
+        "classes": ["AP CSP, Class2, Class3, Class4, Class5"],
+        "GPA": "TBA",
+        "ap_count": "TBA",
     })
     
-    user_stats.append({
-        "ingredient_id": 10006,
-        "ingredient_name": "Retinol",
-        "purpose": "Cell-Communicating Ingredient",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/retinol",
+    user_classes.append({
+        "user_id": 10002,
+        "user_name": "Unknown Person",
+        "classes": ["AP CSP, Class2, Class3, Class4, Class5"],
+        "GPA": "TBA",
+        "ap_count": "TBA",
     })
     
-    user_stats.append({
-        "ingredient_id": 10007,
-        "ingredient_name": "Tretinoin",
-        "purpose": "Cell-Communicating Ingredient",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/tretinoin",
-    })
-    
-    user_stats.append({
-        "ingredient_id": 10008,
-        "ingredient_name": "Pantheol",
-        "purpose": "Soothing, Moisturizer",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/pantheol",
-    })
-    
-    user_stats.append({
-        "ingredient_id": 10009,
-        "ingredient_name": "1,2-Hexanediol",
-        "purpose": "Solvent",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/1-2-hexanediol",
-    })
-    user_stats.append({
-        "ingredient_id": 10010,
-        "ingredient_name": "1,2-Hexanediol",
-        "purpose": "Solvent",
-        "rating": "Goodie",
-        "fda_url": "https://incidecoder.com/ingredients/1-2-hexanediol",
-    })
-    
-    
-    return jsonify(user_stats)
+    return jsonify(user_classes)
 
 
 # this runs the application on the development server
