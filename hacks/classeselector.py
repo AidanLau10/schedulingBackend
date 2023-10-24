@@ -145,7 +145,7 @@ print("Here's your optimized schedule!")
 
 while True:
     input("Press Enter for a personalized schedule")
-    total_study_time = 4  # Total time allocated for studying (in hours)
+    total_study_time = 2  # Total time allocated for studying (in hours)
 
     # Sort classes by duration in descending order
     classes.sort(key=lambda x: x["duration"], reverse=True)
