@@ -143,13 +143,10 @@ classes = [
     {"name": "MARCHING PE/TALL FLAGS", "duration": 0}
     # Add more time depending on how long you need to study
 ]
-
-
 print("Here's your optimized schedule!")
 
 while True:
-    input("Press Enter for a personalized schedule")
-    total_study_time = 0  # Total time allocated for studying (in hours)
+    total_study_time = int(input("Enter the total study time in hours: "))
 
     # Sort classes by duration in descending order
     classes.sort(key=lambda x: x["duration"], reverse=True)
@@ -174,5 +171,6 @@ while True:
 
     if remaining_study_time <= 0:
         print("You've used up all your study time. Take a break to recharge!")
-        print("You may also add more time with the buttons below!")
-        break
+        continue_option = input("Do you want to create another schedule? (yes/no): ").lower()
+        if continue_option != "yes":
+            break
