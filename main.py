@@ -115,18 +115,38 @@ def get_data():
     
     return jsonify(user_classes)
 
+
+API_TOKEN = '2573~mbqfLD2yTcQr8StVbsAHhSC695LjGUSw9SCeRd0x8qysh1uJ5Jvo77uu9IRez34d'
+BASE_URL = 'https://poway.instructure.com/api/v1/'
+
+# List of course IDs
+course_ids = [141645, 141694, 141093, 141643, 144907]
+
+def get_assignments_for_course(course_id):
+    headers = {
+        'Authorization': f'Bearer {API_TOKEN}'
+    }
+    
+    url = f'{BASE_URL}courses/{course_id}/assignments'
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": f"Failed to retrieve assignments for Course {course_id}. Status code: {response.status_code}"}
+
+@app.route('/assignments/user')
+def get_assignments():
+    assignments_data = {}
+    for course_id in course_ids:
+        assignments_data[course_id] = get_assignments_for_course(course_id)
+    return jsonify(assignments_data)
+
+
 base_url = 'https://poway.instructure.com/api/v1/'
 headers = {
     'Authorization': 'Bearer 2573~mbqfLD2yTcQr8StVbsAHhSC695LjGUSw9SCeRd0x8qysh1uJ5Jvo77uu9IRez34d'
 }
-
-def is_valid_iso8601(date_string):
-    try:
-        datetime.fromisoformat(date_string)
-        return True
-    except ValueError:
-        return False
-
 
 @app.route('/assignments')
 def homework_list():
@@ -136,7 +156,7 @@ def homework_list():
         if response.status_code == 200:
             assignments = response.json()
             print(assignments)
-            # Get the current date and time in UTC timezone
+          
             current_date = datetime.now(timezone.utc)
 
             # Filter assignments with due dates in the future
