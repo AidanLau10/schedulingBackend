@@ -135,14 +135,14 @@ def homework_list():
 
         if response.status_code == 200:
             assignments = response.json()
-            
+            print(assignments)
             # Get the current date and time in UTC timezone
             current_date = datetime.now(timezone.utc)
 
             # Filter assignments with due dates in the future
-            future_assignments = [assignment for assignment in assignments if assignment.get('due_at') and datetime.fromisoformat(assignment['due_at']) > current_date]
+            # future_assignments = [assignment for assignment in assignments if assignment.get('due_at') and datetime.fromisoformat(assignment['due_at']) > current_date]
             
-            return jsonify(future_assignments)  # Return JSON response
+            return jsonify(assignments)  # Return JSON response
         else:
             return jsonify({"error": "Failed to retrieve assignments. Status code: " + str(response.status_code)})
     except Exception as e:
