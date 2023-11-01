@@ -116,15 +116,55 @@ def get_data():
     return jsonify(user_classes)
 
 
-API_TOKEN = '2573~mbqfLD2yTcQr8StVbsAHhSC695LjGUSw9SCeRd0x8qysh1uJ5Jvo77uu9IRez34d'
+API_TOKEN_AIDAN = '2573~mbqfLD2yTcQr8StVbsAHhSC695LjGUSw9SCeRd0x8qysh1uJ5Jvo77uu9IRez34d'
+API_TOKEN_RAYYAN = '2573~VhXAGQU60SZMdHyp6O05DM0TI30WJesS5dUSDksokO9SVcN0kSU4URmkbcOZ97zq'
+API_TOKEN_NATHAN = '2573~RF2PBXpX1uYgO6U25S9WcRhFiFs4VVTtuEHNDKsZrLVEIuchaDTWJkVcuIQz7ue2'
+API_TOKEN_DANIEL = '2573~jw4a4CSLbscRwJua3NGScgroqA4LZPJDqpH6RHsT6VhJx6NvmhMc5aUl7Ag71WS8'
 BASE_URL = 'https://poway.instructure.com/api/v1/'
 
 # List of course IDs
-course_ids = [141645, 141694, 141093, 141643, 144907]
+course_ids_aidan = [141645, 141694, 141093, 141643, 144907]
+course_ids_rayyan = [141093, 141645, 140864, 141493, 144997]
+course_ids_nathan = [141645, 141205, 145058, 141627, 140975]
+course_ids_daniel = [141645, 141172, 141588, 141264, 145032]
 
-def get_assignments_for_course(course_id):
+
+def get_assignments_for_course_aidan(course_id):
     headers = {
-        'Authorization': f'Bearer {API_TOKEN}'
+        'Authorization': f'Bearer {API_TOKEN_AIDAN}'
+    }
+    url = f'{BASE_URL}courses/{course_id}/assignments'
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": f"Failed to retrieve assignments for Course {course_id}. Status code: {response.status_code}"}
+def get_assignments_for_course_rayyan(course_id):
+    headers = {
+        'Authorization': f'Bearer {API_TOKEN_RAYYAN}'
+    }
+    url = f'{BASE_URL}courses/{course_id}/assignments'
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": f"Failed to retrieve assignments for Course {course_id}. Status code: {response.status_code}"}
+def get_assignments_for_course_nathan(course_id):
+    headers = {
+        'Authorization': f'Bearer {API_TOKEN_NATHAN}'
+    }
+    url = f'{BASE_URL}courses/{course_id}/assignments'
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": f"Failed to retrieve assignments for Course {course_id}. Status code: {response.status_code}"}
+def get_assignments_for_course_daniel(course_id):
+    headers = {
+        'Authorization': f'Bearer {API_TOKEN_DANIEL}'
     }
     
     url = f'{BASE_URL}courses/{course_id}/assignments'
@@ -135,17 +175,53 @@ def get_assignments_for_course(course_id):
     else:
         return {"error": f"Failed to retrieve assignments for Course {course_id}. Status code: {response.status_code}"}
 
-@app.route('/assignments/user')
-def get_assignments():
+@app.route('/assignments/user/aidan')
+def get_assignments_aidan():
     # assignments_data = {}
-    assignments_data = []
-    for course_id in course_ids:
+    assignments_data_aidan = []
+    for course_id in course_ids_aidan:
         #assignments_data[course_id] = get_assignments_for_course(course_id)
-        assignments_course_data = get_assignments_for_course(course_id)
+        assignments_course_data = get_assignments_for_course_aidan(course_id)
         for assignments_course in assignments_course_data:
-            assignments_data.append(assignments_course)
+            assignments_data_aidan.append(assignments_course)
         
-    return jsonify(assignments_data)
+    return jsonify(assignments_data_aidan)
+
+@app.route('/assignments/user/rayyan')
+def get_assignments_rayyan():
+    # assignments_data = {}
+    assignments_data_rayyan = []
+    for course_id in course_ids_rayyan:
+        #assignments_data[course_id] = get_assignments_for_course(course_id)
+        assignments_course_data = get_assignments_for_course_rayyan(course_id)
+        for assignments_course in assignments_course_data:
+            assignments_data_rayyan.append(assignments_course)
+        
+    return jsonify(assignments_data_rayyan)
+
+@app.route('/assignments/user/nathan')
+def get_assignments_nathan():
+    # assignments_data = {}
+    assignments_data_nathan = []
+    for course_id in course_ids_nathan:
+        #assignments_data[course_id] = get_assignments_for_course(course_id)
+        assignments_course_data = get_assignments_for_course_nathan(course_id)
+        for assignments_course in assignments_course_data:
+            assignments_data_nathan.append(assignments_course)
+        
+    return jsonify(assignments_data_nathan)
+
+@app.route('/assignments/user/daniel')
+def get_assignments_daniel():
+    # assignments_data = {}
+    assignments_data_daniel = []
+    for course_id in course_ids_daniel:
+        #assignments_data[course_id] = get_assignments_for_course(course_id)
+        assignments_course_data = get_assignments_for_course_daniel(course_id)
+        for assignments_course in assignments_course_data:
+            assignments_data_daniel.append(assignments_course)
+        
+    return jsonify(assignments_data_daniel)
 
 
 base_url = 'https://poway.instructure.com/api/v1/'
@@ -179,3 +255,4 @@ if __name__ == "__main__":
     from flask_cors import CORS
     cors = CORS(app)
     app.run(debug=True, host="0.0.0.0", port="5001")
+
