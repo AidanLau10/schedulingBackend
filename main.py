@@ -137,9 +137,14 @@ def get_assignments_for_course(course_id):
 
 @app.route('/assignments/user')
 def get_assignments():
-    assignments_data = {}
+    # assignments_data = {}
+    assignments_data = []
     for course_id in course_ids:
-        assignments_data[course_id] = get_assignments_for_course(course_id)
+        #assignments_data[course_id] = get_assignments_for_course(course_id)
+        assignments_course_data = get_assignments_for_course(course_id)
+        for assignments_course in assignments_course_data:
+            assignments_data.append(assignments_course)
+        
     return jsonify(assignments_data)
 
 
