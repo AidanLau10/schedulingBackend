@@ -120,6 +120,14 @@ headers = {
     'Authorization': 'Bearer 2573~mbqfLD2yTcQr8StVbsAHhSC695LjGUSw9SCeRd0x8qysh1uJ5Jvo77uu9IRez34d'
 }
 
+def is_valid_iso8601(date_string):
+    try:
+        datetime.fromisoformat(date_string)
+        return True
+    except ValueError:
+        return False
+
+
 @app.route('/assignments')
 def homework_list():
     try:
