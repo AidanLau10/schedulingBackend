@@ -8,7 +8,8 @@ from __init__ import app,db  # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 from model.players import initPlayers
-
+import requests
+from datetime import datetime, timezone
 
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
@@ -114,6 +115,30 @@ def get_data():
     
     return jsonify(user_classes)
 
+base_url = 'https://poway.instructure.com/api/v1/'
+headers = {
+    'Authorization': 'Bearer 2573~mbqfLD2yTcQr8StVbsAHhSC695LjGUSw9SCeRd0x8qysh1uJ5Jvo77uu9IRez34d'
+}
+
+@app.route('/assignments')
+def homework_list():
+    try:
+        response = requests.get(base_url + 'courses/141645/assignments', headers=headers)
+
+        if response.status_code == 200:
+            assignments = response.json()
+            
+            # Get the current date and time in UTC timezone
+            current_date = datetime.now(timezone.utc)
+
+            # Filter assignments with due dates in the future
+            future_assignments = [assignment for assignment in assignments if assignment.get('due_at') and datetime.fromisoformat(assignment['due_at']) > current_date]
+            
+            return jsonify(future_assignments)  # Return JSON response
+        else:
+            return jsonify({"error": "Failed to retrieve assignments. Status code: " + str(response.status_code)})
+    except Exception as e:
+        return jsonify({"error": "An error occurred: " + str(e)})
 
 # this runs the application on the development server
 if __name__ == "__main__":
